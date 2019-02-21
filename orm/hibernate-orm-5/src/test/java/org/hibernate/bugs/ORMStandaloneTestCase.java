@@ -13,28 +13,55 @@ import org.junit.Test;
  */
 public class ORMStandaloneTestCase {
 
-	private SessionFactory sf;
+    private SessionFactory sf;
 
-	@Before
-	public void setup() {
-		StandardServiceRegistryBuilder srb = new StandardServiceRegistryBuilder()
-			// Add in any settings that are specific to your test. See resources/hibernate.properties for the defaults.
-			.applySetting( "hibernate.show_sql", "true" )
-			.applySetting( "hibernate.format_sql", "true" )
-			.applySetting( "hibernate.hbm2ddl.auto", "update" );
+    @Before
+    public void setup() {
+        StandardServiceRegistryBuilder srb = new StandardServiceRegistryBuilder()
+                // Add in any settings that are specific to your test. See resources/hibernate.properties for the defaults.
+                .applySetting("hibernate.show_sql", "true")
+                .applySetting("hibernate.format_sql", "true")
+                .applySetting("hibernate.hbm2ddl.auto", "update");
 
-		Metadata metadata = new MetadataSources( srb.build() )
-		// Add your entities here.
-		//	.addAnnotatedClass( Foo.class )
-			.buildMetadata();
+        Metadata metadata = new MetadataSources(srb.build())
+                // Add your entities here.
+                //	.addAnnotatedClass( Foo.class )
+                .addAnnotatedClass(Admin.class)
+                .addAnnotatedClass(Attendance.class)
+                .addAnnotatedClass(AttendanceId.class)
+                .addAnnotatedClass(ClassRoom.class)
+                .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(Department.class)
+                .addAnnotatedClass(Lecture.class)
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Subject.class)
+                .addAnnotatedClass(Teacher.class)
+                .addAnnotatedClass(Teaching.class)
+                .addAnnotatedClass(User.class)
+                .buildMetadata();
 
-		sf = metadata.buildSessionFactory();
-	}
+        sf = metadata.buildSessionFactory();
+    }
 
-	// Add your tests, using standard JUnit.
+    // Add your tests, using standard JUnit.
 
-	@Test
-	public void hhh123Test() throws Exception {
+    @Test
+    public void hhh123Test() throws Exception {
+        Session session = sf.openSession();
+        session.beginTransaction();
 
-	}
+        Admin s = new Admin();
+        s.setEmail("sdfsfd@df.occom");
+        s.setUsername("dfsdfsdff");
+        session.save(s);
+        session.getTransaction().commit();
+        Utils.closeSessionFactory();
+
+    }
+
+
+    @After
+    public void destroy() {
+        sf.close();
+    }
 }
