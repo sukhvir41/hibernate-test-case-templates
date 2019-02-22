@@ -5,9 +5,6 @@
  */
 package entities;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -23,13 +20,9 @@ public class AttendanceId implements Serializable {
 
 
     @Column(name = "lecture_fid")
-    @Getter
-    @Setter
     private String lectureId;
 
     @Column(name = "student_fid", columnDefinition = "uuid")
-    @Getter
-    @Setter
     private UUID studentId;
 
     public AttendanceId() {
@@ -52,5 +45,21 @@ public class AttendanceId implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(lectureId, studentId);
+    }
+
+    public String getLectureId() {
+        return lectureId;
+    }
+
+    public void setLectureId(String lectureId) {
+        this.lectureId = lectureId;
+    }
+
+    public UUID getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(UUID studentId) {
+        this.studentId = studentId;
     }
 }

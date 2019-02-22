@@ -7,9 +7,6 @@ package entities;
 
 import javax.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 
 /**
@@ -21,8 +18,6 @@ public class Admin extends User implements Serializable {
 
     @Column(name = "type")
     @Convert(converter = AdminTypeConverter.class)
-    @Getter
-    @Setter
     private AdminType type;
 
     public Admin() {
@@ -38,4 +33,12 @@ public class Admin extends User implements Serializable {
         return UserType.Admin;
     }
 
+
+    public AdminType getType() {
+        return type;
+    }
+
+    public void setType(AdminType type) {
+        this.type = type;
+    }
 }

@@ -22,7 +22,6 @@ public enum UserType {
 
     private final AtomicInteger count;
 
-    @Getter
     final private String homeLink;
 
     UserType(String type, String theLink) {
@@ -50,4 +49,10 @@ public enum UserType {
         }
     }
 
-}
+    public String getType() {
+        return type;
+    }
+
+    public String getHomeLink() {
+        return homeLink;
+    }}

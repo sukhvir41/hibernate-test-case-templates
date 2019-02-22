@@ -11,13 +11,8 @@ import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.*;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import utility.BCrypt;
-import utility.Utils;
 
 /**
  * @author sukhvir
@@ -33,89 +28,144 @@ public abstract class User implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid")
     @Column(columnDefinition = "UUID")
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
     private UUID id;
 
 
 
     @Column(name = "username", unique = true)
-    @Getter
-    @Setter
     private String username;
 
     @Column(name = "password")
-    @Getter(value = AccessLevel.PRIVATE)
     private String password;
 
     @Column(name = "email", unique = true)
-    @Getter
-    @Setter
     private String email;
 
     @Column(name = "token")
-    @Getter
-    @Setter
     private String token; // used for forget password
 
     @Column(name = "number")
-    @Getter
-    @Setter
     private long number;
 
     @Column(name = "used")
-    @Getter
-    @Setter
     private boolean used; // used to check if the forget password is used or not
 
     @Column(name = "session_id")
-    @Getter
-    @Setter
     private String sessionId;
 
     @Column(name = "session_token")
     private String sessionToken;
 
-    @Column(name = "date")
-    @Getter
-    @Setter
-    @Convert(converter = LocalDateTimeConverter.class)
-    private LocalDateTime date; // used check the forget password token expiry date
+    //@Column(name = "date")
+    //@Convert(converter = LocalDateTimeConverter.class)
+    //private LocalDateTime date; // used check the forget password token expiry date
 
     public User() {
     }
 
     public User(String username, String password, String email, long number) {
         this.username = username;
-        this.setPassword(password);
+       // this.setPassword(password);
         this.email = email;
         this.number = number;
     }
 
-    final public void setSessionToken(String sessionToken) {
-        this.sessionToken = Utils.hash(sessionToken);
+    public UUID getId() {
+        return id;
     }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public long getNumber() {
+        return number;
+    }
+
+    public void setNumber(long number) {
+        this.number = number;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
+    /* final public void setSessionToken(String sessionToken) {
+        this.sessionToken = Utils.hash(sessionToken);
+    }*/
 
     /**
      * this method matches the given session token with the stored session token
      */
-    final public boolean matchSessionToken(String token) {
+    /*final public boolean matchSessionToken(String token) {
         return Utils.hashEquals(this.sessionToken, Utils.hash(token));
-    }
+    }*/
 
     /**
      * this method checks the given password matches with the stored password
      */
-    final public boolean checkPassword(String passwordPlainText) {
+   /* final public boolean checkPassword(String passwordPlainText) {
         return BCrypt.checkpw(passwordPlainText, this.password);
-    }
+    }*/
 
     /**
      * this method hashes the password and sets it
      */
-    final public void setPassword(String password) {
+    /*final public void setPassword(String password) {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
-    }
+    }*/
 
     public abstract UserType getUserType();
 

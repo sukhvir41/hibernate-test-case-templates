@@ -24,4 +24,6 @@ public enum AdminType {
         return type;
     }
 
-}
+    public String getType() {
+        return type;
+    }}

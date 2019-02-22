@@ -5,11 +5,6 @@
  */
 package entities;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,23 +17,15 @@ import java.util.Objects;
 public class Attendance implements Serializable {
 
     @EmbeddedId
-    @Getter
-    @Setter(AccessLevel.PRIVATE)
     private AttendanceId id;
 
     @Column(name = "marked_by_teacher")
-    @Getter
-    @Setter
     private boolean markedByTeacher = false;
 
     @Column(name = "attended")
-    @Getter
-    @Setter
     private boolean attended;
 
     @Column(name = "leave")
-    @Getter
-    @Setter
     private boolean leave = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,10 +37,58 @@ public class Attendance implements Serializable {
     private Student student;
 
 
+    public AttendanceId getId() {
+        return id;
+    }
+
+    public void setId(AttendanceId id) {
+        this.id = id;
+    }
+
+    public boolean isMarkedByTeacher() {
+        return markedByTeacher;
+    }
+
+    public void setMarkedByTeacher(boolean markedByTeacher) {
+        this.markedByTeacher = markedByTeacher;
+    }
+
+    public boolean isAttended() {
+        return attended;
+    }
+
+    public void setAttended(boolean attended) {
+        this.attended = attended;
+    }
+
+    public boolean isLeave() {
+        return leave;
+    }
+
+    public void setLeave(boolean leave) {
+        this.leave = leave;
+    }
+
+    public Lecture getLecture() {
+        return lecture;
+    }
+
+    public void setLecture(Lecture lecture) {
+        this.lecture = lecture;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     public Attendance() {
     }
 
-    public Attendance(Lecture theLecture, Student theStudent, boolean attended) {
+   /* public Attendance(Lecture theLecture, Student theStudent, boolean attended) {
         this.lecture = theLecture;
         this.student = theStudent;
         this.attended = attended;
@@ -84,7 +119,7 @@ public class Attendance implements Serializable {
     public Student getStudent() {
         return this.student;
     }
-
+*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.After;
 
 /**
  * This template demonstrates how to develop a standalone test case for Hibernate ORM.  Although this is perfectly
@@ -29,14 +30,9 @@ public class ORMStandaloneTestCase {
                 .addAnnotatedClass(Admin.class)
                 .addAnnotatedClass(Attendance.class)
                 .addAnnotatedClass(AttendanceId.class)
-                .addAnnotatedClass(ClassRoom.class)
-                .addAnnotatedClass(Course.class)
-                .addAnnotatedClass(Department.class)
                 .addAnnotatedClass(Lecture.class)
                 .addAnnotatedClass(Student.class)
-                .addAnnotatedClass(Subject.class)
                 .addAnnotatedClass(Teacher.class)
-                .addAnnotatedClass(Teaching.class)
                 .addAnnotatedClass(User.class)
                 .buildMetadata();
 

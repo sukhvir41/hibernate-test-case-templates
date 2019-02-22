@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,44 +28,76 @@ public class Lecture implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GenericGenerator(name = "lectureIdGenerator",
+    /*@GenericGenerator(name = "lectureIdGenerator",
             strategy = "entities.LectureIdGenerator")
-    @GeneratedValue(generator = "lectureIdGenerator")
-    @Getter
-    @Setter
+    @GeneratedValue(generator = "lectureIdGenerator")*/
     private String id;
 
     @Column(name = "date")
-    @Getter
-    @Setter
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime date;
 
     @Column(name = "count")
-    @Getter
-    @Setter
     private int count = 1;
 
     @Column(name = "ended")
-    @Getter
-    @Setter
     private boolean ended = false;
 
-
+/*
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tcs_fid", foreignKey = @ForeignKey(name = "lecture_tcs_foreign_key"))
     @Getter
     @Setter
-    Teaching teaching;
+    private Teaching teaching;*/
 
     @OneToMany(mappedBy = "lecture", fetch = FetchType.LAZY)
-    @Getter
     private List<Attendance> attendances = new ArrayList<>();
 
     public Lecture() {
     }
 
-    public Lecture(int count, Teaching teaching) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public boolean isEnded() {
+        return ended;
+    }
+
+    public void setEnded(boolean ended) {
+        this.ended = ended;
+    }
+
+    public List<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
+
+    /*  public Lecture(int count, Teaching teaching) {
         this.count = count;
         addTeaching(teaching);
         this.date = LocalDateTime.now();
@@ -81,7 +111,7 @@ public class Lecture implements Serializable {
     public String toString() {
         return getId() + " " + getTeaching();
     }
-
+*/
 
     @Override
     public boolean equals(Object o) {
