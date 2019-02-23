@@ -1,4 +1,4 @@
-package entities;
+package org.hibernate.bugs;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

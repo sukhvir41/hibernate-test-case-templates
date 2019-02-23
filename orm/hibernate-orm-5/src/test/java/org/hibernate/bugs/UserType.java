@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package org.hibernate.bugs;
 
-import lombok.Getter;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

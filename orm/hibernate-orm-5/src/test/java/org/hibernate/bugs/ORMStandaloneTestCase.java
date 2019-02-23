@@ -1,6 +1,6 @@
 package org.hibernate.bugs;
 
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -32,7 +32,7 @@ public class ORMStandaloneTestCase {
                 .addAnnotatedClass(AttendanceId.class)
                 .addAnnotatedClass(Lecture.class)
                 .addAnnotatedClass(Student.class)
-                .addAnnotatedClass(Teacher.class)
+                //.addAnnotatedClass(Teacher.class)
                 .addAnnotatedClass(User.class)
                 .buildMetadata();
 
@@ -51,8 +51,6 @@ public class ORMStandaloneTestCase {
         s.setUsername("dfsdfsdff");
         session.save(s);
         session.getTransaction().commit();
-        Utils.closeSessionFactory();
-
     }
 
 
