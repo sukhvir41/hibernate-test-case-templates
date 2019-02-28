@@ -88,38 +88,6 @@ public class Attendance implements Serializable {
     public Attendance() {
     }
 
-   /* public Attendance(Lecture theLecture, Student theStudent, boolean attended) {
-        this.lecture = theLecture;
-        this.student = theStudent;
-        this.attended = attended;
-        this.id = new AttendanceId(lecture.getId(), student.getId());
-    }
-
-    public Attendance(@NonNull Lecture lecture, @NonNull Student student, boolean attended, boolean markedByTeacher, boolean leave) {
-        this.markedByTeacher = markedByTeacher;
-        this.attended = attended;
-        this.leave = leave;
-        this.lecture = lecture;
-        this.student = student;
-        this.id = new AttendanceId(lecture.getId(), student.getId());
-    }
-
-    protected void setLecture(Lecture theLecture) {
-        this.id.setLectureId(theLecture.getId());
-    }
-
-    protected void setStudent(Student theStudent) {
-        this.id.setStudentId(theStudent.getId());
-    }
-
-    public Lecture getLecture() {
-        return this.lecture;
-    }
-
-    public Student getStudent() {
-        return this.student;
-    }
-*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

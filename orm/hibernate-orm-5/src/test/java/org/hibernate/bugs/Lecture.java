@@ -19,9 +19,9 @@ import org.hibernate.annotations.GenericGenerator;
  * @author Kalpesh
  */
 
-@NamedNativeQueries(
+/*@NamedNativeQueries(
         @NamedNativeQuery(name = "getLectureId", query = "select get_lecture_id()")
-)
+)*/
 @Entity
 @Table(name = "lecture")
 public class Lecture implements Serializable {
@@ -42,13 +42,6 @@ public class Lecture implements Serializable {
 
     @Column(name = "ended")
     private boolean ended = false;
-
-/*
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tcs_fid", foreignKey = @ForeignKey(name = "lecture_tcs_foreign_key"))
-    @Getter
-    @Setter
-    private Teaching teaching;*/
 
     @OneToMany(mappedBy = "lecture", fetch = FetchType.LAZY)
     private List<Attendance> attendances = new ArrayList<>();
@@ -95,23 +88,6 @@ public class Lecture implements Serializable {
     public void setAttendances(List<Attendance> attendances) {
         this.attendances = attendances;
     }
-
-
-    /*  public Lecture(int count, Teaching teaching) {
-        this.count = count;
-        addTeaching(teaching);
-        this.date = LocalDateTime.now();
-    }
-
-    public final void addTeaching(Teaching teaching) {
-        teaching.addLecture(this);
-    }
-
-    @Override
-    public String toString() {
-        return getId() + " " + getTeaching();
-    }
-*/
 
     @Override
     public boolean equals(Object o) {

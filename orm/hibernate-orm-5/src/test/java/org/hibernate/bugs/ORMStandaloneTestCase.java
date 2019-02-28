@@ -26,13 +26,11 @@ public class ORMStandaloneTestCase {
 
         Metadata metadata = new MetadataSources(srb.build())
                 // Add your entities here.
-                //	.addAnnotatedClass( Foo.class )
                 .addAnnotatedClass(Admin.class)
                 .addAnnotatedClass(Attendance.class)
                 .addAnnotatedClass(AttendanceId.class)
                 .addAnnotatedClass(Lecture.class)
                 .addAnnotatedClass(Student.class)
-                //.addAnnotatedClass(Teacher.class)
                 .addAnnotatedClass(User.class)
                 .buildMetadata();
 
@@ -47,9 +45,30 @@ public class ORMStandaloneTestCase {
         session.beginTransaction();
 
         Admin s = new Admin();
-        s.setEmail("sdfsfd@df.occom");
-        s.setUsername("dfsdfsdff");
+        s.setEmail("admin@test.com");
+        s.setUsername("testing");
+        s.setPassword("testpassowrd");
         session.save(s);
+
+        Student student = new Student();
+        student.setfName("student1");
+        student.setUsername("student");
+        session.save(s);
+
+        Lecture lecture = new Lecture();
+        lecture.setId("123456");
+        session.save(lecture);
+
+        Attendance attendance = new Attendance();
+        attendance.setId(new AttendanceId(lecture.getId(), student.getId()));
+        attendance.setLecture(lecture);
+        attendance.setStudent(student);
+        attendance.setAttended(true);
+
+        student.getAttendances().add(attendance);
+        lecture.getAttendances().add(attendance);
+
+        session.save(attendance);
         session.getTransaction().commit();
     }
 

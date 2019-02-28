@@ -31,7 +31,6 @@ public abstract class User implements Serializable {
     private UUID id;
 
 
-
     @Column(name = "username", unique = true)
     private String username;
 
@@ -56,16 +55,16 @@ public abstract class User implements Serializable {
     @Column(name = "session_token")
     private String sessionToken;
 
-    //@Column(name = "date")
-    //@Convert(converter = LocalDateTimeConverter.class)
-    //private LocalDateTime date; // used check the forget password token expiry date
+    @Column(name = "date")
+    @Convert(converter = LocalDateTimeConverter.class)
+    private LocalDateTime date; // used check the forget password token expiry date
 
     public User() {
     }
 
     public User(String username, String password, String email, long number) {
         this.username = username;
-       // this.setPassword(password);
+        // this.setPassword(password);
         this.email = email;
         this.number = number;
     }
@@ -142,30 +141,6 @@ public abstract class User implements Serializable {
         this.sessionToken = sessionToken;
     }
 
-    /* final public void setSessionToken(String sessionToken) {
-        this.sessionToken = Utils.hash(sessionToken);
-    }*/
-
-    /**
-     * this method matches the given session token with the stored session token
-     */
-    /*final public boolean matchSessionToken(String token) {
-        return Utils.hashEquals(this.sessionToken, Utils.hash(token));
-    }*/
-
-    /**
-     * this method checks the given password matches with the stored password
-     */
-   /* final public boolean checkPassword(String passwordPlainText) {
-        return BCrypt.checkpw(passwordPlainText, this.password);
-    }*/
-
-    /**
-     * this method hashes the password and sets it
-     */
-    /*final public void setPassword(String password) {
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt(10));
-    }*/
 
     public abstract UserType getUserType();
 

@@ -34,28 +34,12 @@ public class Student extends User implements Serializable, Comparable<Student> {
     @Column(name = "unaccounted")
     private boolean unaccounted;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_fid", foreignKey = @ForeignKey(name = "student_foreign_key"))
-    @Getter
-    @Setter
-    private ClassRoom classRoom;*/
-
     @Column(name = "verified")
     private boolean verified;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private List<Attendance> attendances = new ArrayList<>();
 
-
-   /* @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "student_subject_link",
-            joinColumns = @JoinColumn(name = "student_fid"),
-            inverseJoinColumns = @JoinColumn(name = "subject_fid"),
-            foreignKey = @ForeignKey(name = "student_subject_link_student_foreign_key"),
-            inverseForeignKey = @ForeignKey(name = "student_subject_link_subject_foreign_key"))
-    @Getter
-    @Setter
-    private Set<Subject> subjects = new HashSet<>();*/
 
     public Student() {
     }
